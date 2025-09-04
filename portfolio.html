@@ -87,25 +87,10 @@
 </head>
 <body class="text-white min-h-screen dynamic-bg">
     <canvas id="femCanvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
-    <!-- Logo Page -->
-    <div id="logoPage" class="fixed inset-0 flex items-center justify-center">
-        <div class="text-center fade-in">
-            <h1 class="text-3xl font-black netflix-red bg-clip-text text-transparent logo-animation mb-8">
-                Pasupathi Pari | Berechnungsingenieur
-            </h1>
-            
-        </div>
-    </div>
 
-    <script>
-  // Call your showProfiles() function automatically after 3 seconds
-  setTimeout(() => {
-    showProfiles(); // this replaces the Enter Portfolio button click
-  }, 4000);
-</script>
 
     <!-- Profile Selection Page -->
-    <div id="profilePage" class="hidden min-h-screen flex flex-col items-center justify-center p-8">
+    <div id="profilePage" class="min-h-screen flex flex-col items-center justify-center p-8">
         <!-- Profile Selection -->
         <div class="flex flex-col items-center justify-center min-h-[80vh] px-4">
             <h2 class="text-4xl font-light mb-12 slide-up">Mein berufliches Profil erkunden</h2>
@@ -176,9 +161,37 @@
     <h3 class="text-lg font-medium text-gray-300 hover:text-white transition-colors">Lebenslauf</h3>
     <p class="text-sm text-gray-500 mt-1">PDF herunterladen</p>
   </div>
+</div>
+       <div class="mt-20 flex justify-center gap-8">
+  <a href="https://www.linkedin.com/in/pasupathipari/" 
+     target="_blank" 
+     class="text-gray-300 hover:text-blue-500 transition-colors duration-300"
+     aria-label="LinkedIn Profile">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" 
+         class="bi bi-linkedin" viewBox="0 0 16 16">
+      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 
+               0 16 .513 16 1.146v13.708c0 .633-.526 
+               1.146-1.175 1.146H1.175C.526 16 0 
+               15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
+               0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
+               3.226 2.4 3.934c0 .694.521 1.248 
+               1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
+               1.232-.878.869 0 1.216.662 
+               1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
+               0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 
+               0 7.225 0 7.225z"/>
+    </svg>
+  </a>
+
+    <a href="mailto:pasupathi1198@gmail.com" 
+     aria-label="Send Email"
+     class="transition-transform duration-300 scale-110">
+    <img class="w-10 h-10 rounded-full" 
+         src="https://ps.w.org/wp-html-mail/assets/icon-256x256.png?rev=1730334" 
+         alt="Email Icon">
+  </a>
 
 </div>
-
             
         </div>
     </div>
@@ -203,15 +216,9 @@
 
     <script>
         function showProfiles() {
-            document.getElementById('logoPage').classList.add('hidden');
+           
             document.getElementById('contentPage').classList.add('hidden');
             document.getElementById('profilePage').classList.remove('hidden');
-        }
-
-        function showLogo() {
-            document.getElementById('profilePage').classList.add('hidden');
-            document.getElementById('contentPage').classList.add('hidden');
-            document.getElementById('logoPage').classList.remove('hidden');
         }
 
         function selectProfile(profileType) {
