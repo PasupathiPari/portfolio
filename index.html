@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <style>
+        :root {
+            --netflix-red: #e50914;
+            --background-color: #000;
+            --reveal-duration: 0.8s;
+            --reveal-delay-start: 0.2s;
+            --reveal-delay-increment: 0.1s;
+            --collapse-duration: 0.8s;
+            --total-reveal-time: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 8 + var(--reveal-duration));
+            --collapse-start-time: calc(var(--total-reveal-time) + 0.5s);
+            --p-move-duration: 0.5s;
+            --p-zoom-duration: 0.8s;
+            --p-zoom-delay: calc(var(--collapse-start-time) + var(--collapse-duration) + var(--p-move-duration) + 0.2s);
+            --lumieres-start-delay: var(--p-zoom-delay);
+            --lumieres-appear-duration: 2s;
+            --lumieres-fade-duration: 1s;
+            --lumieres-hold-duration: 5s;
+            --lumieres-fade-start-delay: calc(var(--lumieres-start-delay) + var(--lumieres-hold-duration));
+        }
+
+        body {
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--netflix-red);
+            overflow: hidden;
+        }
+
+        .portfolio-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 80vw;
+            max-width: 1200px;
+        }
+
+        .portfolio-container {
+            display: flex;
+            font-size: 8rem;
+            font-weight: bold;
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-100%);
+            position: relative;
+            animation-duration: var(--reveal-duration);
+            animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+            animation-fill-mode: forwards;
+        }
+
+        .letter {
+            animation-name: train-reveal;
+        }
+        .letter:nth-child(1) { animation-delay: calc(var(--reveal-delay-start)); }
+        .letter:nth-child(2) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment)); }
+        .letter:nth-child(3) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 2); }
+        .letter:nth-child(4) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 3); }
+        .letter:nth-child(5) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 4); }
+        .letter:nth-child(6) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 5); }
+        .letter:nth-child(7) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 6); }
+        .letter:nth-child(8) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 7); }
+        .letter:nth-child(9) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 8); }
+
+        @keyframes train-reveal {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .letter:not(:first-child) {
+            animation-name: train-reveal, collapse-to-p;
+            animation-duration: var(--reveal-duration), var(--collapse-duration);
+            animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1), ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        .letter:nth-child(2) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment)), calc(var(--collapse-start-time)); --tx: -1em; }
+        .letter:nth-child(3) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 2), calc(var(--collapse-start-time) + 0.05s); --tx: -2.1em; }
+        .letter:nth-child(4) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 3), calc(var(--collapse-start-time) + 0.1s); --tx: -3.2em; }
+        .letter:nth-child(5) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 4), calc(var(--collapse-start-time) + 0.15s); --tx: -4.3em; }
+        .letter:nth-child(6) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 5), calc(var(--collapse-start-time) + 0.2s); --tx: -5.1em; }
+        .letter:nth-child(7) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 6), calc(var(--collapse-start-time) + 0.25s); --tx: -6.1em; }
+        .letter:nth-child(8) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 7), calc(var(--collapse-start-time) + 0.3s); --tx: -7.1em; }
+        .letter:nth-child(9) { animation-delay: calc(var(--reveal-delay-start) + var(--reveal-delay-increment) * 8), calc(var(--collapse-start-time) + 0.35s); --tx: -8.1em; }
+
+        @keyframes collapse-to-p {
+            to {
+                transform: translateX(var(--tx));
+                opacity: 0;
+            }
+        }
+
+        .letter:first-child {
+            animation-name: train-reveal, final-p-move, p-zoom-fade;
+            animation-delay: var(--reveal-delay-start), calc(var(--collapse-start-time) + var(--collapse-duration) + 0.2s), var(--p-zoom-delay);
+            animation-duration: var(--reveal-duration), var(--p-move-duration), var(--p-zoom-duration);
+            animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1), cubic-bezier(0.19, 1, 0.22, 1), ease-in-out;
+        }
+
+        @keyframes final-p-move {
+            to {
+                transform: translateX(1.5em);
+            }
+        }
+
+        @keyframes p-zoom-fade {
+            0% {
+                opacity: 1;
+                transform: translateX(1.5em) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(1.5em) scale(10);
+            }
+        }
+
+        .lumieres-container {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            transform: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .effect-lumieres {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: showing-lumieres var(--lumieres-appear-duration) var(--lumieres-start-delay) forwards,
+                       fading-lumieres var(--lumieres-fade-duration) var(--lumieres-fade-start-delay) forwards;
+            top: 0;
+            left: 0;
+        }
+
+        .effect-lumieres [class*="lamp-"] {
+            position: absolute;
+            display: block;
+            height: 100%;
+            box-shadow: 0px 0px 5px 0px rgba(228, 9, 19, 0.5);
+            background: var(--color);
+            left: 50%;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes width-grow {
+            0% { width: 0; }
+            100% { width: var(--final-width); }
+        }
+
+        /* The following classes now use '--final-width' and have their animation-names defined */
+        /* Increased widths for lumineries */
+        .lamp-1 { --color: #ff0100; --final-width: 0.3%; animation-delay: calc(var(--lumieres-start-delay) + 0.05s); }
+        .lamp-2 { --color: #ffde01; --final-width: 0.4%; animation-delay: calc(var(--lumieres-start-delay) + 0.1s); }
+        .lamp-3 { --color: #ff00cc; --final-width: 0.5%; animation-delay: calc(var(--lumieres-start-delay) + 0.15s); }
+        .lamp-4 { --color: #04fd8f; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 0.2s); }
+        .lamp-5 { --color: #ff0100; --final-width: 0.35%; animation-delay: calc(var(--lumieres-start-delay) + 0.25s); }
+        .lamp-6 { --color: #ff9600; --final-width: 0.6%; animation-delay: calc(var(--lumieres-start-delay) + 0.3s); }
+        .lamp-7 { --color: #0084ff; --final-width: 0.55%; animation-delay: calc(var(--lumieres-start-delay) + 0.35s); }
+        .lamp-8 { --color: #f84006; --final-width: 0.5%; animation-delay: calc(var(--lumieres-start-delay) + 0.4s); }
+        .lamp-9 { --color: #ffc601; --final-width: 0.65%; animation-delay: calc(var(--lumieres-start-delay) + 0.45s); }
+        .lamp-10 { --color: #ff4800; --final-width: 0.6%; animation-delay: calc(var(--lumieres-start-delay) + 0.5s); }
+        .lamp-11 { --color: #fd0100; --final-width: 0.5%; animation-delay: calc(var(--lumieres-start-delay) + 0.55s); }
+        .lamp-12 { --color: #01ffff; --final-width: 0.55%; animation-delay: calc(var(--lumieres-start-delay) + 0.6s); }
+        .lamp-13 { --color: #ffc601; --final-width: 0.2%; animation-delay: calc(var(--lumieres-start-delay) + 0.65s); }
+        .lamp-14 { --color: #ffc601; --final-width: 0.4%; animation-delay: calc(var(--lumieres-start-delay) + 0.7s); }
+        .lamp-15 { --color: #0078fe; --final-width: 0.5%; animation-delay: calc(var(--lumieres-start-delay) + 0.75s); }
+        .lamp-16 { --color: #0080ff; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 0.8s); }
+        .lamp-17 { --color: #ffae01; --final-width: 0.6%; animation-delay: calc(var(--lumieres-start-delay) + 0.85s); }
+        .lamp-18 { --color: #ff00bf; --final-width: 0.4%; animation-delay: calc(var(--lumieres-start-delay) + 0.9s); }
+        .lamp-19 { --color: #a601f4; --final-width: 0.25%; animation-delay: calc(var(--lumieres-start-delay) + 0.95s); }
+        .lamp-20 { --color: #f30b34; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 1.0s); }
+        .lamp-21 { --color: #ff00bf; --final-width: 0.4%; animation-delay: calc(var(--lumieres-start-delay) + 1.05s); }
+        .lamp-22 { --color: #04fd8f; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 1.1s); }
+        .lamp-23 { --color: #01ffff; --final-width: 0.4%; animation-delay: calc(var(--lumieres-start-delay) + 1.15s); }
+        .lamp-24 { --color: #a201ff; --final-width: 0.3%; animation-delay: calc(var(--lumieres-start-delay) + 1.2s); }
+        .lamp-25 { --color: #ec0014; --final-width: 0.3%; animation-delay: calc(var(--lumieres-start-delay) + 1.25s); }
+        .lamp-26 { --color: #0078fe; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 1.3s); }
+        .lamp-27 { --color: #ff0036; --final-width: 0.5%; animation-delay: calc(var(--lumieres-start-delay) + 1.35s); }
+        .lamp-28 { --color: #06f98c; --final-width: 0.45%; animation-delay: calc(var(--lumieres-start-delay) + 1.4s); }
+        
+        /* Apply both movement and width-grow animations */
+        .lamp-1, .lamp-3, .lamp-5, .lamp-7, .lamp-9, .lamp-11, .lamp-13, .lamp-15, .lamp-17, .lamp-19, .lamp-21, .lamp-23, .lamp-25, .lamp-27 {
+            animation-name: lumieres-moving-left, width-grow;
+            animation-duration: var(--lumieres-appear-duration), var(--lumieres-appear-duration);
+            animation-fill-mode: forwards;
+        }
+
+        .lamp-2, .lamp-4, .lamp-6, .lamp-8, .lamp-10, .lamp-12, .lamp-14, .lamp-16, .lamp-18, .lamp-20, .lamp-22, .lamp-24, .lamp-26, .lamp-28 {
+            animation-name: lumieres-moving-right, width-grow;
+            animation-duration: var(--lumieres-appear-duration), var(--lumieres-appear-duration);
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes lumieres-moving-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(calc(100vw - 50% - var(--final-width))); }
+        }
+
+        @keyframes lumieres-moving-left {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(calc(-100vw + 50%)); }
+        }
+
+        @keyframes showing-lumieres {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fading-lumieres {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-wrapper">
+        <div class="portfolio-container">
+            <span class="letter">P</span>
+            <span class="letter">O</span>
+            <span class="letter">R</span>
+            <span class="letter">T</span>
+            <span class="letter">F</span>
+            <span class="letter">O</span>
+            <span class="letter">L</span>
+            <span class="letter">I</span>
+            <span class="letter">O</span>
+        </div>
+    </div>
+    
+    <div class="lumieres-container">
+        <div class="effect-lumieres">
+            <div class="lamp-1" style="--color: #ff0100;"></div>
+            <div class="lamp-2" style="--color: #ffde01;"></div>
+            <div class="lamp-3" style="--color: #ff00cc;"></div>
+            <div class="lamp-4" style="--color: #04fd8f;"></div>
+            <div class="lamp-5" style="--color: #ff0100;"></div>
+            <div class="lamp-6" style="--color: #ff9600;"></div>
+            <div class="lamp-7" style="--color: #0084ff;"></div>
+            <div class="lamp-8" style="--color: #f84006;"></div>
+            <div class="lamp-9" style="--color: #ffc601;"></div>
+            <div class="lamp-10" style="--color: #ff4800;"></div>
+            <div class="lamp-11" style="--color: #fd0100;"></div>
+            <div class="lamp-12" style="--color: #01ffff;"></div>
+            <div class="lamp-13" style="--color: #ffc601;"></div>
+            <div class="lamp-14" style="--color: #ffc601;"></div>
+            <div class="lamp-15" style="--color: #0078fe;"></div>
+            <div class="lamp-16" style="--color: #0080ff;"></div>
+            <div class="lamp-17" style="--color: #ffae01;"></div>
+            <div class="lamp-18" style="--color: #ff00bf;"></div>
+            <div class="lamp-19" style="--color: #a601f4;"></div>
+            <div class="lamp-20" style="--color: #f30b34;"></div>
+            <div class="lamp-21" style="--color: #ff00bf;"></div>
+            <div class="lamp-22" style="--color: #04fd8f;"></div>
+            <div class="lamp-23" style="--color: #01ffff;"></div>
+            <div class="lamp-24" style="--color: #a201ff;"></div>
+            <div class="lamp-25" style="--color: #ec0014;"></div>
+            <div class="lamp-26" style="--color: #0078fe;"></div>
+            <div class="lamp-27" style="--color: #ff0036;"></div>
+            <div class="lamp-28" style="--color: #06f98c;"></div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const introDuration = 6000; // 6 seconds
+
+        setTimeout(() => {
+            // This line is the only one you need to change
+            window.location.href = 'portfolio.html';
+        }, introDuration);
+    });
+</script>
+</body>
+</html>
