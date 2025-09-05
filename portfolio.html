@@ -29,6 +29,140 @@
       z-index: -1; pointer-events: none;
       background-color: #0f0f0f;
     }
+
+     .profile-car-container {
+      perspective: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-car {
+      background: #181818;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+      width: 320px;
+      padding: 0 0 32px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      transition: 
+        transform 0.35s cubic-bezier(.25,.8,.25,1),
+        box-shadow 0.35s cubic-bezier(.25,.8,.25,1),
+        border 0.3s,
+        box-shadow 0.3s;
+      cursor: pointer;
+      will-change: transform;
+      z-index: 2;
+      border: 2px solid rgba(255,255,255,0.18);
+    }
+    .profile-car::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20,20,20,0.5) 60%, rgba(0,0,0,0.05) 100%);
+      z-index: 1;
+      pointer-events: none;
+      transition: background 0.35s;
+    }
+    .profile-car:hover::before {
+      background: linear-gradient(to top, rgba(20,20,20,0.5) 60%, rgba(0,0,0,0.05) 100%);
+    }
+    .profile-car img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      filter: grayscale(0) brightness(1);
+      transition: filter 0.35s;
+      z-index: 0;
+      position: relative;
+    }
+    .profile-car:hover img {
+      filter: grayscale(0%) brightness(1.2);
+    }
+    .profile-details {
+      padding: 28px 20px 0 20px;
+      text-align: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-details h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.7rem;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .profile-details p {
+      margin: 0 0 18px 0;
+      color: #e5e5e5;
+      font-size: 1.05rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 12px;
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e5e5;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.2s, transform 0.2s, box-shadow 0.2s;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    .social-links a:hover {
+      color: #fff;
+      box-shadow: 0 0 12px 4px #fff;
+      background: rgba(255,255,255,0.08);
+      transform: scale(1.2);
+    }
+    .social-links .linkedin-icon svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+    .social-links .email-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    /* White glow effect behind the card */
+    .white-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 380px;
+      height: 420px;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(32px);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+      background: radial-gradient(ellipse at 70% 120%, #fff 0%, transparent 70%);
+    }
+    .profile-car:hover ~ .white-glow {
+      opacity: 1;
+    }
+    /* White border glow on hover */
+    .profile-car.glow {
+      box-shadow: 0 0 24px 6px #fff, 0 8px 32px rgba(0,0,0,0.7);
+      border: 2px solid #fff;
+    }
+
   </style>
 </head>
 <body class="text-white min-h-screen dynamic-bg">
@@ -122,38 +256,33 @@
 
 </div>
 
-
+<div class="profile-car-container" style="position:relative;">
+    <div class="profile-car" id="profileCar">
+      <img src="GREE55091.JPG" alt="Profile Photo">
+      <div class="profile-details">
+        <h2>Pasupathi Pari</h2>
+        <p>Berechnungsingenieur<br>FEM Spezialist - Maschinenbau, Verpackung & Verbundwerkstoffe.</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/pasupathipari/" target="_blank" title="LinkedIn" class="linkedin-icon">
+            <svg viewBox="0 0 448 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="448" height="512" rx="80" fill="#0A66C2"/>
+              <g transform="scale(0.85) translate(34,40)">
+                <path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0c29.5 0 53.6 24.09 53.6 53.6 0 29.6-24.1 53.7-53.6 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.5s1.2-242.1 0-267.1h92.4v37.9c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.7 39.8 106.7 125.4V448z" fill="#fff"/>
+              </g>
+            </svg>
+          </a>
+          <a href="mailto:pasupathi1198@gmail.com" title="Email" class="email-icon">&#9993;</a>
+        </div>
+      </div>
+    </div>
+    <div class="white-glow" id="whiteGlow"></div>
+  </div>
 
 
       </div>
 
       <!-- Social links -->
-      <div class="mt-12 sm:mt-20 flex justify-center gap-6 sm:gap-8 flex-wrap">
-        <a href="https://www.linkedin.com/in/pasupathipari/" target="_blank"
-           class="text-gray-300 hover:text-blue-500 transition-colors duration-300"
-           aria-label="LinkedIn Profile">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="sm:w-10 sm:h-10" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 
-               0 16 .513 16 1.146v13.708c0 .633-.526 
-               1.146-1.175 1.146H1.175C.526 16 0 
-               15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
-               0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
-               3.226 2.4 3.934c0 .694.521 1.248 
-               1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
-               1.232-.878.869 0 1.216.662 
-               1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
-               0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 
-               0 7.225 0 7.225z"/>
-          </svg>
-        </a>
-
-        <a href="mailto:pasupathi1198@gmail.com" aria-label="Send Email"
-           class="transition-transform duration-300 scale-105 sm:scale-110">
-          <img class="w-8 h-8 sm:w-10 sm:h-10 rounded-full" 
-               src="https://ps.w.org/wp-html-mail/assets/icon-256x256.png?rev=1730334" 
-               alt="Email Icon">
-        </a>
-      </div>
+      
     </div>
   </div>
 
@@ -680,6 +809,39 @@ draw();
       document.getElementById('profilePage').classList.remove('hidden');
     }
   });
+</script>
+
+<script>
+   const car = document.getElementById('profileCar');
+    const glow = document.getElementById('whiteGlow');
+    car.addEventListener('mousemove', (e) => {
+      const rect = car.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * 12;
+      const rotateY = ((x - centerX) / centerX) * -12;
+      car.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
+
+      // Move the glow to the opposite side of the mouse
+      const glowX = 70 + ((x - centerX) / centerX) * -30;
+      const glowY = 120 + ((y - centerY) / centerY) * -40;
+      glow.style.background = `radial-gradient(ellipse at ${glowX}% ${glowY}%, #fff 0%, transparent 70%)`;
+      glow.style.opacity = "1";
+      car.classList.add('glow');
+    });
+    car.addEventListener('mouseleave', () => {
+      car.style.transform = '';
+      glow.style.background = 'radial-gradient(ellipse at 70% 120%, #fff 0%, transparent 70%)';
+      glow.style.opacity = "0.6";
+      car.classList.remove('glow');
+    });
+    car.addEventListener('mouseenter', () => {
+      car.style.transition = 'transform 0.15s cubic-bezier(.25,.8,.25,1)';
+      glow.style.opacity = "1";
+      car.classList.add('glow');
+    });
 </script>
 
 </body>
