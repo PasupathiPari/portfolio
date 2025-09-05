@@ -657,5 +657,30 @@ function draw() {
 
 draw();
   </script>
+
+  <script>
+  // Push a history state when a profile is selected
+  const originalSelectProfile = selectProfile;
+  selectProfile = function(profileType) {
+    // Call your existing function to show the content
+    originalSelectProfile(profileType);
+
+    // Push the state to the browser history
+    history.pushState({ profile: profileType }, "", `?profile=${profileType}`);
+  };
+
+  // Listen for back/forward navigation
+  window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.profile) {
+      // User navigated back to a profile state
+      originalSelectProfile(event.state.profile);
+    } else {
+      // No state: show the main profile selection page
+      document.getElementById('contentPage').classList.add('hidden');
+      document.getElementById('profilePage').classList.remove('hidden');
+    }
+  });
+</script>
+
 </body>
 </html>
